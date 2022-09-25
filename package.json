@@ -1,7 +1,7 @@
 {
   "name": "mascarpone",
   "version": "0.1.0",
-  "homepage": "https://notes.johnvial.info/mascarpone",
+  "homepage": "https://hilarygoh.github.io/mascarpone",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
