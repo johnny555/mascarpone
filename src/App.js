@@ -4,13 +4,17 @@ import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 import React from 'react';
 import Tesseract from 'tesseract.js';
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import Alert from '@mui/material/Alert';
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from '@mui/material/Stack';
 
 
 function preprocess(img) {
   return img;
 }
 
-
+// OCR Bit
 
 async function recognize (image, langs, options) 
 {
@@ -25,7 +29,9 @@ async function recognize (image, langs, options)
     });
 }
 
-const image_dim = {wdith: 640, height: 280};
+// App Bit
+
+const image_dim = {width: 580, height: 280};
 
 function App() {
 
@@ -51,24 +57,47 @@ function App() {
       }) 
   }, [webcamRef, setImgSrc]);
 
+// To show camera
 
  var blah = (
   <Container maxWidth="sm">
-  {imgSrc && (
-    <img width={640}
+    <img width={580} height={280}
       src={imgSrc}
     />
-  )}
 </Container>
  );
 
+
+ // UI Stuff
   return (
     <div>
+    <Stack 
+    mt={2}
+    spacing={1}
+    alignItems="center">   
+    
     <Container maxWidth="sm">
-     <Typography variant="h3" gutterBottom>
-        Please scan your card
+     <Typography variant="h4" gutterBottom>
+        Lake Monger Community Shed
+        Attendance Book
      </Typography>
     </Container>
+
+    <Container maxWidth="sm">
+     <Alert severity="info" sx={{width:550}} >
+      <AlertTitle><strong>Please Scan Your Badge</strong></AlertTitle>
+     </Alert>
+    </Container>
+
+    {blah}
+    
+    <Container maxWidth="sm">
+        <Typography variant="h4" gutterBottom>
+          Membership #:  
+          { textSrc }
+        </Typography>
+    </Container>
+    
     <Container maxWidth="sm">
         <Webcam 
           ref={webcamRef} 
@@ -78,20 +107,20 @@ function App() {
           videoConstraints={image_dim}
         />
     </Container>
+    
     <Container maxWidth="sm">
-       <Fab variant="extended" onClick={capture}>Scan Now</Fab>
+       <Fab color='primary' 
+            variant="extended" 
+            onClick={capture}
+            sx={{width:580}}
+            >
+          <CameraAltOutlinedIcon sx={{ mr:2}}/>
+          Scan Now
+      </Fab>
     </Container>
-    <Container maxWidth="sm">
 
-      { textSrc && (
-        <Typography variant="h4" gutterBottom>
-          { textSrc }
-        </Typography>
-      )}
-
-    </Container>
-    {blah}
-
+    
+    </Stack>
     </div>
   );
 }
