@@ -1,13 +1,15 @@
+import React from 'react';
 import Webcam from "react-webcam";
+import Tesseract from 'tesseract.js';
+
+import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+
 import Fab from '@mui/material/Fab';
-import React from 'react';
-import Tesseract from 'tesseract.js';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import Alert from '@mui/material/Alert';
 import AlertTitle from "@mui/material/AlertTitle";
-import Stack from '@mui/material/Stack';
 
 
 function preprocess(img) {
@@ -57,7 +59,7 @@ function App() {
       }) 
   }, [webcamRef, setImgSrc]);
 
-// To show camera
+// Camera Bit
 
  var cameracapture = (
   <Container maxWidth="sm">
