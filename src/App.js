@@ -59,7 +59,7 @@ function App() {
 
 // To show camera
 
- var blah = (
+ var cameracapture = (
   <Container maxWidth="sm">
     <img width={580} height={280}
       src={imgSrc}
@@ -89,7 +89,7 @@ function App() {
      </Alert>
     </Container>
 
-    {blah}
+    {cameracapture}
     
     <Container maxWidth="sm">
         <Typography variant="h4" gutterBottom>
