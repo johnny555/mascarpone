@@ -32,7 +32,7 @@ async function recognize (image, langs, options)
     });
 }
 
-// App Bit and webcam
+// App Bit
 
 const image_dim = {width: 580, height: 500};
 
@@ -84,7 +84,7 @@ function App() {
 
  var cameracapture = (
   <Container sx={{ width: '100%' }} >
-    <img width={580} height={280}
+    <img width='100%'
       src={imgSrc}
     />
 </Container>
@@ -166,6 +166,7 @@ function App() {
           screenshotQuality={0.1}
           imageSmoothing={false}
           videoConstraints={image_dim}
+          width='100%'
         />
     </Container>
     
