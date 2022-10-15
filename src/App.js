@@ -32,7 +32,7 @@ async function recognize (image, langs, options)
     });
 }
 
-// App Bit
+// App Bit and webcam
 
 const image_dim = {width: 580, height: 500};
 
