@@ -1,6 +1,5 @@
 import React from 'react';
 import Webcam from "react-webcam";
-import Tesseract from 'tesseract.js';
 
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
@@ -17,42 +16,44 @@ function preprocess(img) {
   return img;
 }
 
-// OCR Bit
+function parse_response(json_response) {
+  var data = json_response["data"][1]["data"];
+  var snippets = data.map((d) => {return d[0];});
+  var result = "";
 
-async function recognize (image, langs, options) 
-{
-  const worker = Tesseract.createWorker(options);
-  await worker.load();
-  await worker.loadLanguage(langs);
-  await worker.initialize(langs);
-  await worker.setParameters({tessedit_char_whitelist: "0123456789"})
-  return worker.recognize(image)
-    .finally(async () => {
-      await worker.terminate();
-    });
+  snippets.map((s) => {
+    console.log(s);
+    var temp = s.match(/\d{3}/);
+    if (temp) 
+      { result = result + temp } 
+  });
+
+  if (result === "") 
+  { result = "No digits found, try again"; }
+  return result;
 }
 
 // App Bit
 
-const image_dim = {width: 580, height: 500};
+const image_dim = {width: 500, height: 280};
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 300,
   bgcolor: 'background.paper',
   border: '4px solid #009688',
   boxShadow: 24,
-  p: 10,
+  p: 5,
 };
 
 function App() {
 
   const webcamRef = React.useRef(null);
 
-  const [imgSrc, setImgSrc] = React.useState(null);
+  const [imgSrc, setImgSrc] = React.useState("https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=204&h=204");
   const [textSrc, setTextSrc] = React.useState(null);
 
   const [open, setOpen] = React.useState(false);
@@ -63,19 +64,24 @@ function App() {
   }
 
   const capture = React.useCallback(() => {
+
     const imageSrc = preprocess(
-      webcamRef.current.getScreenshot(image_dim
-    ));
+      webcamRef.current.getScreenshot(image_dim));
+    
     setImgSrc(imageSrc);
  
-    recognize(
-      imageSrc,
-      'eng',
-         { logger: m => console.log(m)
-         }
-      ).then(({ data: { text } }) => {
-        setTextSrc(text);
-      }) 
+    fetch('https://hf.space/embed/tomofi/EasyOCR/+/api/predict/', 
+      { method: "POST", 
+        body: JSON.stringify({ "data": [ imageSrc , ["en"] ]})
+       , headers: { "Content-Type": "application/json" } }
+     ).then(function(response) 
+         { return response.json(); }
+         ).then(
+          function(json_response)
+          { 
+          setTextSrc(parse_response(json_response));
+         });
+    
   }, [webcamRef, setImgSrc]);
 
   const clearstuff = () => {
@@ -86,8 +92,9 @@ function App() {
 // Camera Bit
 
  var cameracapture = (
-  <Container sx={{ width: '60%' }} >
-    <img width='100%'
+  <Container>
+    <img 
+      width={500} height={280}
       src={imgSrc}
     />
 </Container>
@@ -151,7 +158,7 @@ function App() {
               Please scan your badge again
             </Typography>
             <Typography id="modal-modal-description" variant="h5" sx={{ mt: 2 }}>
-              We also told the computer it got it wrong for training purposes.
+              Make sure it's not upside down.
             </Typography>
           </Box>
         </Modal>
@@ -162,9 +169,9 @@ function App() {
     
     {cameracapture}
 
-    <Container sx={{ width: '60%' }}>
+    <Container sx={{ width: '100%' }}>
         <Webcam 
-          width='100%'
+          sx={{ width: '10%' }}
           ref={webcamRef} 
           screenshotFormat={'image/jpeg'}
           screenshotQuality={0.1}
