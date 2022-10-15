@@ -57,7 +57,10 @@ function App() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    clearstuff()
+  }
 
   const capture = React.useCallback(() => {
     const imageSrc = preprocess(
@@ -83,7 +86,7 @@ function App() {
 // Camera Bit
 
  var cameracapture = (
-  <Container sx={{ width: '80%' }} >
+  <Container sx={{ width: '60%' }} >
     <img width='100%'
       src={imgSrc}
     />
@@ -96,17 +99,17 @@ function App() {
     <Stack 
     mt={2}
     spacing={1}
-    alignItems="center">   
+    alignItems="center">
     
     <Container sx={{ width: '100%' }}>
-     <Typography variant="h5" gutterBottom>
+     <Typography variant="h6" gutterBottom>
         Lake Monger Community Shed
         Attendance Book
      </Typography>
     </Container>
 
     <Container sx={{ width: '100%' }}>
-    <Typography variant="h5" gutterBottom>
+    <Typography variant="h6" gutterBottom>
         Please scan your badge
      </Typography>
      <Divider />
@@ -159,14 +162,14 @@ function App() {
     
     {cameracapture}
 
-    <Container sx={{ width: '100%' }}>
+    <Container sx={{ width: '60%' }}>
         <Webcam 
+          width='100%'
           ref={webcamRef} 
           screenshotFormat={'image/jpeg'}
           screenshotQuality={0.1}
           imageSmoothing={false}
           videoConstraints={image_dim}
-          width='100%'
         />
     </Container>
     
