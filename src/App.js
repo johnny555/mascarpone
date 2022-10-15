@@ -5,12 +5,13 @@ import Tesseract from 'tesseract.js';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
+import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import Alert from '@mui/material/Alert';
-import AlertTitle from "@mui/material/AlertTitle";
-
+import Modal from '@mui/material/Modal';
 
 function preprocess(img) {
   return img;
@@ -33,7 +34,19 @@ async function recognize (image, langs, options)
 
 // App Bit
 
-const image_dim = {width: 580, height: 280};
+const image_dim = {width: 580, height: 500};
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '4px solid #009688',
+  boxShadow: 24,
+  p: 10,
+};
 
 function App() {
 
@@ -42,6 +55,9 @@ function App() {
   const [imgSrc, setImgSrc] = React.useState(null);
   const [textSrc, setTextSrc] = React.useState(null);
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const capture = React.useCallback(() => {
     const imageSrc = preprocess(
@@ -59,16 +75,20 @@ function App() {
       }) 
   }, [webcamRef, setImgSrc]);
 
+  const clearstuff = () => {
+    setTextSrc("");
+    setImgSrc("https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=204&h=204");
+  };
+  
 // Camera Bit
 
  var cameracapture = (
-  <Container maxWidth="sm">
+  <Container sx={{ width: '100%' }} >
     <img width={580} height={280}
       src={imgSrc}
     />
 </Container>
  );
-
 
  // UI Stuff
   return (
@@ -78,29 +98,68 @@ function App() {
     spacing={1}
     alignItems="center">   
     
-    <Container maxWidth="sm">
-     <Typography variant="h4" gutterBottom>
+    <Container sx={{ width: '100%' }}>
+     <Typography variant="h5" gutterBottom>
         Lake Monger Community Shed
         Attendance Book
      </Typography>
     </Container>
 
-    <Container maxWidth="sm">
-     <Alert severity="info" sx={{width:550}} >
-      <AlertTitle><strong>Please Scan Your Badge</strong></AlertTitle>
-     </Alert>
+    <Container sx={{ width: '100%' }}>
+    <Typography variant="h5" gutterBottom>
+        Please scan your badge
+     </Typography>
+     <Divider />
     </Container>
+    <Divider />
 
-    {cameracapture}
-    
-    <Container maxWidth="sm">
+    <Container sx={{ width: '100%' }}>
         <Typography variant="h4" gutterBottom>
-          Membership #:  
-          { textSrc }
+          Membership #:{ textSrc }
         </Typography>
     </Container>
+
+    <Container sx={{ width: '100%' }}>
+    <Stack spacing={1} direction="row">
+        <Button 
+        sx={{ width: '100%' }} 
+        onClick={clearstuff} 
+        variant="contained" 
+        color="success" 
+        size="large">
+          That's correct
+        </Button>
+        <Button 
+        sx={{ width: '100%' }} 
+        onClick={handleOpen} 
+        variant="outlined" 
+        color="error" 
+        size="large">
+          That's wrong
+        </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h3">
+              Please scan your badge again
+            </Typography>
+            <Typography id="modal-modal-description" variant="h5" sx={{ mt: 2 }}>
+              We also told the computer it got it wrong for training purposes.
+            </Typography>
+          </Box>
+        </Modal>
+        
+      </Stack>
+    </Container>
+    <Divider />
     
-    <Container maxWidth="sm">
+    {cameracapture}
+
+    <Container sx={{ width: '100%' }}>
         <Webcam 
           ref={webcamRef} 
           screenshotFormat={'image/jpeg'}
@@ -110,21 +169,19 @@ function App() {
         />
     </Container>
     
-    <Container maxWidth="sm">
-       <Fab color='primary' 
+    <Container>
+       <Fab sx={{ width: '100%' }}
+            color='primary' 
             variant="extended" 
-            onClick={capture}
-            sx={{width:580}}
-            >
+            onClick={capture}>
           <CameraAltOutlinedIcon sx={{ mr:2}}/>
           Scan Now
       </Fab>
     </Container>
-
-    
     </Stack>
     </div>
   );
+
 }
 
 export default App;
