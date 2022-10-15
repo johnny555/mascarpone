@@ -83,7 +83,7 @@ function App() {
 // Camera Bit
 
  var cameracapture = (
-  <Container sx={{ width: '100%' }} >
+  <Container sx={{ width: '80%' }} >
     <img width='100%'
       src={imgSrc}
     />
