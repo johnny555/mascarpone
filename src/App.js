@@ -12,6 +12,20 @@ import Fab from '@mui/material/Fab';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import Modal from '@mui/material/Modal';
 
+import Alert from '@mui/material/Alert';
+import AlertTitle from "@mui/material/AlertTitle";
+
+import { DataStore } from '@aws-amplify/datastore';
+import { AttendanceBook } from './models';
+
+async function save_number(number) {
+  await DataStore.save(
+    new AttendanceBook({
+		"time": new Date().toISOString(),
+		"membership_number": number
+	}));
+}
+
 function preprocess(img) {
   return img;
 }
@@ -85,6 +99,7 @@ function App() {
   }, [webcamRef, setImgSrc]);
 
   const clearstuff = () => {
+    save_number(textSrc);
     setTextSrc("");
     setImgSrc("https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=204&h=204");
   };

@@ -4,6 +4,7 @@
   "homepage": "https://hilarygoh.github.io/mascarpone",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^3.5.11",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.6",
