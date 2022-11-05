@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mascarpone/static/css/main.e6c13ad2.css",
-    "main.js": "/mascarpone/static/js/main.f8a5bfe1.js",
+    "main.js": "/mascarpone/static/js/main.7427a0c3.js",
     "static/js/787.d24fb6b9.chunk.js": "/mascarpone/static/js/787.d24fb6b9.chunk.js",
     "index.html": "/mascarpone/index.html",
     "main.e6c13ad2.css.map": "/mascarpone/static/css/main.e6c13ad2.css.map",
-    "main.f8a5bfe1.js.map": "/mascarpone/static/js/main.f8a5bfe1.js.map",
+    "main.7427a0c3.js.map": "/mascarpone/static/js/main.7427a0c3.js.map",
     "787.d24fb6b9.chunk.js.map": "/mascarpone/static/js/787.d24fb6b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.f8a5bfe1.js"
+    "static/js/main.7427a0c3.js"
   ]
 }
