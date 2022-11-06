@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mascarpone-staging-60013-authRole",
+      "UnauthRoleArn": "arn:aws:iam::431751101616:role/amplify-mascarpone-staging-60013-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::431751101616:role/amplify-mascarpone-staging-60013-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-mascarpone-staging-60013-deployment",
+      "UnauthRoleName": "amplify-mascarpone-staging-60013-unauthRole",
+      "StackName": "amplify-mascarpone-staging-60013",
+      "StackId": "arn:aws:cloudformation:us-east-1:431751101616:stack/amplify-mascarpone-staging-60013/1d251ab0-5ccf-11ed-8b9f-0ade16e98ce5",
+      "AmplifyAppId": "d3qd00pq4r20jc"
+    }
+  }
+}
