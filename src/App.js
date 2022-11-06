@@ -15,17 +15,23 @@ import Modal from '@mui/material/Modal';
 import Alert from '@mui/material/Alert';
 import AlertTitle from "@mui/material/AlertTitle";
 
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+
 import { DataStore } from '@aws-amplify/datastore';
 import { AttendanceBook } from './models';
 
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
+Amplify.configure(config);
+
+
 async function save_number(number) {
   await DataStore.save(
     new AttendanceBook({
 		"time": new Date().toISOString(),
-		"membership_number": number
+		"membership_number": parseInt(number)
 	}));
 }
 
@@ -66,7 +72,8 @@ const style = {
   p: 5,
 };
 
-function App({ signOut, user }) {
+//function App({ signOut, user }) {
+  function App() {
 
   const webcamRef = React.useRef(null);
 
@@ -118,6 +125,15 @@ function App({ signOut, user }) {
 </Container>
  );
 
+/*
+ var amplify_stuff = (
+  <div>
+  <Typography variant="h1">Hello {user.username}</Typography>
+    <Button onClick={signOut}>Sign out</Button>
+    <h2>Amplify Todos</h2>
+    </div>
+ );*/
+
  // UI Stuff
   return (
   <div>
@@ -127,9 +143,7 @@ function App({ signOut, user }) {
     alignItems="center">
     
     <Container sx={{ width: '100%' }}>
-    <Typography variant="h1">Hello {user.username}</Typography>
-    <Button onClick={signOut}>Sign out</Button>
-    <h2>Amplify Todos</h2>
+    
 
      <Typography variant="h6" gutterBottom>
         Lake Monger Community Shed
@@ -217,4 +231,4 @@ function App({ signOut, user }) {
 
 }
 
-export default withAuthenticator(App);
+export default App;
