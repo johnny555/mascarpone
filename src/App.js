@@ -18,6 +18,9 @@ import AlertTitle from "@mui/material/AlertTitle";
 import { DataStore } from '@aws-amplify/datastore';
 import { AttendanceBook } from './models';
 
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
 async function save_number(number) {
   await DataStore.save(
     new AttendanceBook({
@@ -63,7 +66,7 @@ const style = {
   p: 5,
 };
 
-function App() {
+function App({ signOut, user }) {
 
   const webcamRef = React.useRef(null);
 
@@ -117,13 +120,17 @@ function App() {
 
  // UI Stuff
   return (
-    <div>
+  <div>
     <Stack 
     mt={2}
     spacing={1}
     alignItems="center">
     
     <Container sx={{ width: '100%' }}>
+    <Typography variant="h1">Hello {user.username}</Typography>
+    <Button onClick={signOut}>Sign out</Button>
+    <h2>Amplify Todos</h2>
+
      <Typography variant="h6" gutterBottom>
         Lake Monger Community Shed
         Attendance Book
@@ -210,4 +217,4 @@ function App() {
 
 }
 
-export default App;
+export default withAuthenticator(App);
