@@ -15,6 +15,8 @@ import Modal from '@mui/material/Modal';
 import Alert from '@mui/material/Alert';
 import AlertTitle from "@mui/material/AlertTitle";
 
+import csvDownload from 'json-to-csv-export'
+
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 
@@ -33,6 +35,30 @@ async function save_number(number) {
 		"time": new Date().toISOString(),
 		"membership_number": parseInt(number)
 	}));
+  console.log("transmitted" + parseInt(number));
+}
+
+async function get_attendance_book() 
+{
+
+  const book = await DataStore.query(AttendanceBook);
+  const data_dump = [];
+  book.map((m) => {
+    data_dump.push({
+      time: m.time,
+      membership_number: m.membership_number
+    });
+  });
+
+  console.log(data_dump);
+  const dataToConvert = {
+    data: data_dump,
+    filename: 'attendance_Book.csv',
+    delimiter: ',',
+  }
+  
+
+  csvDownload(dataToConvert);
 }
 
 function preprocess(img) {
@@ -223,6 +249,14 @@ const style = {
             onClick={capture}>
           <CameraAltOutlinedIcon sx={{ mr:2}}/>
           Scan Now
+      </Fab>
+    </Container>
+    <Container>
+       <Fab sx={{ width: '100%' }}
+            color='secondary' 
+            variant="small" 
+            onClick={get_attendance_book}>
+          Download logs
       </Fab>
     </Container>
     </Stack>
