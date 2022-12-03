@@ -254,7 +254,7 @@ const style = {
     <Container>
        <Fab sx={{ width: '100%' }}
             color='secondary' 
-            variant="small" 
+            variant="extended" 
             onClick={get_attendance_book}>
           Download logs
       </Fab>
