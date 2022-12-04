@@ -84,14 +84,16 @@ function parse_response(json_response) {
 
 // App Bit
 
-const image_dim = {width: 500, height: 280};
+const image_dim = {width: '100%', height: '100%'};
+//crops total h w of image capture box
 
 const style = {
+  //changes style of 'That's Wrong' dialog box
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 300,
+  width: 400,
   bgcolor: 'background.paper',
   border: '4px solid #009688',
   boxShadow: 24,
@@ -189,18 +191,12 @@ const style = {
     spacing={1}
     alignItems="center">
     
-    <Container sx={{ width: '100%' }}>
-    
 
-     <Typography variant="h6" gutterBottom>
+
+    <Container sx={{ width: '100%' }}>
+     <Typography variant="h7" gutterBottom>
         Lake Monger Community Shed
         Attendance Book
-     </Typography>
-    </Container>
-
-    <Container sx={{ width: '100%' }}>
-    <Typography variant="h6" gutterBottom>
-        Please scan your badge
      </Typography>
      <Divider />
     </Container>
@@ -237,10 +233,10 @@ const style = {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h3">
+            <Typography id="modal-modal-title" variant="h4">
               Please scan your badge again
             </Typography>
-            <Typography id="modal-modal-description" variant="h5" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" variant="h5" sx={{ mt: 1}}>
               Make sure it's not upside down.
             </Typography>
           </Box>
@@ -274,7 +270,7 @@ const style = {
             variant="extended" 
             onClick={capture}>
           <CameraAltOutlinedIcon sx={{ mr:2}}/>
-          Scan Now
+          Please Scan Your Badge
       </Fab>
     </Container>
     <Container>
