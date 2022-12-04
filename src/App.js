@@ -106,11 +106,15 @@ const style = {
   const [imgSrc, setImgSrc] = React.useState("https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=204&h=204");
   const [textSrc, setTextSrc] = React.useState(null);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-    clearstuff()
+  const [openModal, setOpenModal] = React.useState(false);
+  
+  const [showVideoFeed, setShowVideoFeed] = React.useState(true);
+
+  const handleOpenModal = () => setOpenModal(true);
+  
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    clearstuff();
   }
 
   const capture = React.useCallback(() => {
@@ -119,6 +123,7 @@ const style = {
       webcamRef.current.getScreenshot(image_dim));
     
     setImgSrc(imageSrc);
+    setShowVideoFeed(false);
  
     fetch('https://hf.space/embed/tomofi/EasyOCR/+/api/predict/', 
       { method: "POST", 
@@ -135,21 +140,24 @@ const style = {
   }, [webcamRef, setImgSrc]);
 
   const clearstuff = () => {
-    save_number(textSrc);
     setTextSrc("");
     setImgSrc("https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=204&h=204");
+    setShowVideoFeed(true);
+    console.log("cleared stuff ran!")
+  };
+
+  const save_and_clear = () => {
+    
+    if (textSrc) {
+      save_number(textSrc);
+      console.log("Sending textSrc")
+      console.log("text src");
+    };
+    console.log("cleared");
+
+    clearstuff();
   };
   
-// Camera Bit
-
- var cameracapture = (
-  <Container>
-    <img 
-      width={500} height={280}
-      src={imgSrc}
-    />
-</Container>
- );
 
 /*
  var amplify_stuff = (
@@ -159,6 +167,19 @@ const style = {
     <h2>Amplify Todos</h2>
     </div>
  );*/
+
+ var videoFeedSx;
+ var screenshotSx;
+
+ if (showVideoFeed) 
+ {
+  videoFeedSx = [];
+  screenshotSx = { display: 'none' };
+ } else
+ {
+  videoFeedSx = { display: 'none' };
+  screenshotSx = [];
+ }
 
  // UI Stuff
   return (
@@ -185,17 +206,17 @@ const style = {
     </Container>
     <Divider />
 
-    <Container sx={{ width: '100%' }}>
+    <Container sx={screenshotSx}>
         <Typography variant="h4" gutterBottom>
           Membership #:{ textSrc }
         </Typography>
     </Container>
 
-    <Container sx={{ width: '100%' }}>
+    <Container sx={screenshotSx}>
     <Stack spacing={1} direction="row">
         <Button 
         sx={{ width: '100%' }} 
-        onClick={clearstuff} 
+        onClick={save_and_clear} 
         variant="contained" 
         color="success" 
         size="large">
@@ -203,15 +224,15 @@ const style = {
         </Button>
         <Button 
         sx={{ width: '100%' }} 
-        onClick={handleOpen} 
+        onClick={handleOpenModal} 
         variant="outlined" 
         color="error" 
         size="large">
           That's wrong
         </Button>
         <Modal
-          open={open}
-          onClose={handleClose}
+          open={openModal}
+          onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
@@ -228,12 +249,9 @@ const style = {
       </Stack>
     </Container>
     <Divider />
-    
-    {cameracapture}
-
-    <Container sx={{ width: '100%' }}>
+ 
+    <Container sx={videoFeedSx} >
         <Webcam 
-          sx={{ width: '10%' }}
           ref={webcamRef} 
           screenshotFormat={'image/jpeg'}
           screenshotQuality={0.1}
@@ -241,6 +259,14 @@ const style = {
           videoConstraints={image_dim}
         />
     </Container>
+
+    <Container sx={screenshotSx} >
+        <img 
+          width={500} height={280}
+          src={imgSrc}
+        />
+    </Container>
+
     
     <Container>
        <Fab sx={{ width: '100%' }}
