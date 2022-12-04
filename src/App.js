@@ -84,7 +84,7 @@ function parse_response(json_response) {
 
 // App Bit
 
-const image_dim = {width: '100%', height: '100%'};
+const image_dim = {width: 500, height: 280};
 //crops total h w of image capture box
 
 const style = {
@@ -125,6 +125,7 @@ const style = {
       webcamRef.current.getScreenshot(image_dim));
     
     setImgSrc(imageSrc);
+    console.log(imageSrc);
     setShowVideoFeed(false);
  
     fetch('https://hf.space/embed/tomofi/EasyOCR/+/api/predict/', 
@@ -202,7 +203,7 @@ const style = {
     </Container>
     <Divider />
 
-    <Container sx={screenshotSx}>
+    <Container >
         <Typography variant="h4" gutterBottom>
           Membership #:{ textSrc }
         </Typography>
