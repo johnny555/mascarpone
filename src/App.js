@@ -81,7 +81,7 @@ function parse_response(json_response) {
 
 // App Bit
 
-const image_dim = {width: 300, height: 500};
+const image_dim = {width: 400, height: 500};
 //crops total h w of image capture box
 
 const style = {
