@@ -86,7 +86,7 @@ function parse_response(json_response) {
 const style = {
 
   position: 'absolute',
-  top: '50%',
+  top: '60%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 500,
@@ -151,7 +151,7 @@ function App() {
     </Container>
 
     <Container sx={{ width: '100%' }}>
-     <Typography variant="h4" gutterBottom>
+     <Typography variant="h4" gutterBottom sx={{color: 'primary.main' }}>
        Please log your attendance here, no need to sign out.
      </Typography>
      <Divider />
@@ -159,15 +159,29 @@ function App() {
     <Divider/>
 
     <Container>
-    <Box>
+    <Box >
       <form onSubmit={save_and_clear}>
         <TextField 
         value={textSrc}
         onChange={handleInputChange}
-        type='number' fullWidth label="Enter your Membership Number" id="fullWidth"
+        type='number' fullWidth label="Enter your Membership Number" id="outlined-basic" variant='outlined'
         inputProps={{ style: { fontSize: "5rem" } }}/>
       </form>
     </Box>
+    <Divider />
+    </Container>
+    <Divider/>
+
+    <Container sx={{ width: '100%' }}>
+     <Typography variant="h5" gutterBottom>
+       Instructions
+     </Typography>
+     <Typography variant="body1" gutterBottom>
+       1. Tap in the box to enter your Membership Number.<br/>
+       2. A keyboard will appear, enter your numbers.<br/>
+       3. Tap the Enter key, a modal appears confirming submission.<br/>
+       4. The modal disappears and the box is reset for the next person.<br/>
+     </Typography>
     </Container>
 
     <Container>
@@ -178,19 +192,23 @@ function App() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          <Typography id="modal-modal-title" variant="h4" component="h2">
+            Thankyou
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Tap outside this box to dismiss, or wait 3 seconds
           </Typography>
         </Box>
       </Modal>
     </Container>
 
     <Container>
-       <Fab sx={{ width: '100%' }}
-            color='secondary' 
+       <Fab sx={{ width: 'fullwidth', 
+       position: 'fixed',
+       bottom: (theme) => theme.spacing(3),
+       right:(theme) => theme.spacing(2) 
+       }}
+             
             variant="extended" 
             onClick={get_attendance_book}>
             Download Logs
