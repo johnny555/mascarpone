@@ -203,15 +203,28 @@ function App() {
     </Container>
 
     <Container>
-       <Fab sx={{ width: 'fullwidth', 
+       <Button sx={{ width: 'fullwidth', 
        position: 'fixed',
        bottom: (theme) => theme.spacing(3),
-       right:(theme) => theme.spacing(2) 
+       left:(theme) => theme.spacing(2) 
        }}
              
             variant="extended" 
             onClick={get_attendance_book}>
             Download Logs
+      </Button>
+    </Container>
+
+    <Container>
+       <Fab color = 'primary'
+       sx={{ width: 'fullwidth', 
+       position: 'fixed',
+       bottom: (theme) => theme.spacing(3),
+       right:(theme) => theme.spacing(2) 
+       }}
+            variant="extended" 
+            onClick={get_attendance_book}>
+            Submit
       </Fab>
     </Container>
 
