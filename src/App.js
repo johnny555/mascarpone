@@ -176,10 +176,10 @@ function App() {
      <Typography variant="h5" gutterBottom>
        Instructions
      </Typography>
-     <Typography variant="body1" gutterBottom>
+     <Typography variant="body2" gutterBottom>
        1. Tap in the box to enter your Membership Number.<br/>
        2. A keyboard will appear, enter your numbers.<br/>
-       3. Tap the Submit button or Enter key on the keyboard.<br/> 
+       3. Tap the Submit button or Enter Key on the keyboard.<br/> 
        4. A modal appears confirming submission.<br/>
        5. The modal disappears and the box is reset for the next person.<br/>
      </Typography>
@@ -194,21 +194,37 @@ function App() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h4" component="h1">
-            Thankyou. <br/>
+            Thank you. <br/>
             <br/>
-            Tap outside this box to dismiss, or wait 3 seconds.
+            Dismiss - Wait 3 seconds or tap outside this box.
           </Typography>
         </Box>
       </Modal>
     </Container>
 
     <Container>
-       <Button sx={{ width: 'fullwidth', 
-       position: 'fixed',
-       bottom: (theme) => theme.spacing(3),
-       left:(theme) => theme.spacing(2) 
+    <Divider />
+    </Container>
+    <Divider/>
+
+    <Container sx={{ width: '100%' }}>
+     <Typography variant="h5" gutterBottom>
+       It's not working?
+     </Typography>
+     <Typography variant="body2" gutterBottom>
+       1. The app needs to be connected to the WiFi to work.<br/>
+       2. Dry hands may not work when tapping on the screen.<br/>
+       3. Make sure you press the Submit button to record your attendance.<br/>
+       Please contact Hilary or Andy and let us if the app is not working.<br/>
+     </Typography>
+    </Container>
+
+    <Container>
+       <Button sx={{ 
+       //position: 'fixed',
+       //bottom: (theme) => theme.spacing(3),
+       //left:(theme) => theme.spacing(2) 
        }}
-             
             variant="extended" 
             onClick={get_attendance_book}>
             Download Logs
@@ -227,7 +243,7 @@ function App() {
                
             variant="extended" 
             color = "success"
-            onClick={get_attendance_book}>
+            onClick={save_and_clear}>
             <h1>Submit</h1>
       </Fab>
     </Container>
