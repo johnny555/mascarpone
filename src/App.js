@@ -179,8 +179,9 @@ function App() {
      <Typography variant="body1" gutterBottom>
        1. Tap in the box to enter your Membership Number.<br/>
        2. A keyboard will appear, enter your numbers.<br/>
-       3. Tap the Enter key, a modal appears confirming submission.<br/>
-       4. The modal disappears and the box is reset for the next person.<br/>
+       3. Tap the Submit button or Enter key on the keyboard.<br/> 
+       4. A modal appears confirming submission.<br/>
+       5. The modal disappears and the box is reset for the next person.<br/>
      </Typography>
     </Container>
 
@@ -192,11 +193,10 @@ function App() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h2">
-            Thankyou
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Tap outside this box to dismiss, or wait 3 seconds
+          <Typography id="modal-modal-title" variant="h4" component="h1">
+            Thankyou. <br/>
+            <br/>
+            Tap outside this box to dismiss, or wait 3 seconds.
           </Typography>
         </Box>
       </Modal>
@@ -217,12 +217,16 @@ function App() {
 
     <Container>
        <Fab color = 'primary'
-       sx={{ width: 'fullwidth', 
+       sx=
+       {{ width: 300,
+       mr:1,
        position: 'fixed',
        bottom: (theme) => theme.spacing(3),
        right:(theme) => theme.spacing(2) 
        }}
+               
             variant="extended" 
+            color = "success"
             onClick={get_attendance_book}>
             Submit
       </Fab>
