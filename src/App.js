@@ -226,7 +226,7 @@ function App() {
     <Container>
     <Divider />
     </Container>
-    <Divider/>
+    <Divider/> 
 
     <Container>
        <Button sx={{ 
