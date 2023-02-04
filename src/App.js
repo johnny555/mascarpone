@@ -228,7 +228,7 @@ function App() {
             variant="extended" 
             color = "success"
             onClick={get_attendance_book}>
-            Submit
+            <h1>Submit</h1>
       </Fab>
     </Container>
 
