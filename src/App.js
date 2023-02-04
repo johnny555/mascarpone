@@ -82,7 +82,7 @@ function parse_response(json_response) {
 
 ///// App Bit
 
-//changes style of 'Thankyou' modal box
+//changes style of 'Thank you' modal box
 const style = {
 
   position: 'absolute',
@@ -193,10 +193,10 @@ function App() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h1">
-            Thank you. <br/>
+          <Typography color='primary.main' id="modal-modal-title" variant="h4" component="h1">
+            Thank You. <br/>
             <br/>
-            Dismiss - Wait 3 seconds or tap outside this box.
+            Dismiss - wait 3 seconds or tap outside this box.
           </Typography>
         </Box>
       </Modal>
@@ -220,9 +220,18 @@ function App() {
     </Container>
 
     <Container>
+    <Divider />
+    </Container>
+    <Divider/>
+    <Container>
+    <Divider />
+    </Container>
+    <Divider/>
+
+    <Container>
        <Button sx={{ 
-       //position: 'fixed',
-       //bottom: (theme) => theme.spacing(3),
+       position: 'fixed',
+       bottom: (theme) => theme.spacing(3),
        //left:(theme) => theme.spacing(2) 
        }}
             variant="extended" 
