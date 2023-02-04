@@ -91,9 +91,10 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 500,
   bgcolor: 'background.paper',
-  border: '4px solid #009688',
+  //border: '4px solid #009688',
+  outline: 'none',
   boxShadow: 24,
-  p: 5,
+  p: 5
 };
 
 function App() {
